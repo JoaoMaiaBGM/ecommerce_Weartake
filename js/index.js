@@ -53,6 +53,7 @@ function createCard(productList){
     tagImg.src = productList[i].img
       
       //id
+    divProductCard.id = productList[i].id
     buttonProductCardButton.id = productList[i].id
 
       //card__body
@@ -62,8 +63,9 @@ function createCard(productList){
     spanProductCardPrice.innerHTML = `R$${productList[i].value},00`
     buttonProductCardButton.innerHTML = productList[i].addCart
     
-    buttonProductCardButton.addEventListener('click', () =>{
-      addCheckoutCart(productList[i]), summary()
+    buttonProductCardButton.addEventListener('click', (event) =>{
+      addCheckoutCart(productList[i])
+      buttonProductCardButtonSum(event)
  })
   } 
 }
@@ -112,6 +114,7 @@ function addCheckoutCart(event){
   tagImg.src = event.img
 
     //id
+  divCheckoutCardBody.id = event.id
   buttonCheckoutListBtn.id = event.id
 
     //card_body
@@ -121,6 +124,7 @@ function addCheckoutCart(event){
 
   buttonCheckoutListBtn.addEventListener('click', (event) =>{
     removeCheckoutCart(event)
+    buttonCheckoutListBtnReduce(event)
 })
 }
 
@@ -136,8 +140,22 @@ function removeCheckoutCart(event){
 }
 
 
-
 //calculando a quantidade e o total
+function buttonProductCardButtonSum(event){
+  const elementSum = event.target
+
+  if(elementSum.classList == 'productCard__button'){
+    sum(elementSum)
+  }
+}
+
+function buttonCheckoutListBtnReduce(event){
+  const elementReduce = event.target
+
+  if(elementReduce.classList == 'checkoutList__btn'){
+    reduce(elementReduce)
+  }
+}
 
 const divCheckout = document.querySelector('.checkout')
 
@@ -153,20 +171,40 @@ const divSummary = document.createElement('div')
   divSummary.appendChild(spanSummaryTotal)
   spanSummaryTotal.classList.add('summary__total')
 
-function summary(event){
-
-  const element = event.target
-  
   let count = 0
-  let soma = 0
+  let summation = 0
 
-  for(let i = 0; i < event.length; i++){
+function sum(event){
+
+  event.target
+  event.parentElement.parentElement
+
+  for(let i = 0; i < data.length; i++){
+    if(event.parentElement.parentElement.id == data[i].id){
       count++
-      soma += event[i].value
+      summation += data[i].value
+    }
   }
   
   spanSummaryCount.innerHTML = '<div>Quantidade</div>' + `<div>${count}</div>`
 
-  spanSummaryTotal.innerHTML = '<div>Total</div>' + `<div>R$${soma},00</div>`
+  spanSummaryTotal.innerHTML = '<div>Total</div>' + `<div>R$${summation},00</div>`
+}
+
+
+function reduce(event){
+
+  event.target
+  event.parentElement
+
+  for(let i = 0; i < data.length; i++){
+    if(event.parentElement.id == data[i].id){
+      count -= 1
+      summation -= data[i].value
+    }
+  }
   
+  spanSummaryCount.innerHTML = '<div>Quantidade</div>' + `<div>${count}</div>`
+
+  spanSummaryTotal.innerHTML = '<div>Total</div>' + `<div>R$${summation},00</div>`
 }

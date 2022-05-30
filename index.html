@@ -5,8 +5,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./css/style.css">
-  <script defer src="./js/database.js"></script>
-  <script defer src="./js/index.js"></script>
   <title>S8-01 E-commerce</title>
 </head>
 
@@ -17,10 +15,9 @@
         <h1 class="logo">Weartake</h1>
         <nav>
           <ul class="menuNavegation">
-            <li><a class="principal" href="#">Todos</a></li>
-            <li><a href="#">Acessórios</a></li>
-            <li><a href="#">Calçados</a></li>
-            <li><a href="#">Camisetas</a></li>
+            <li><button id="principal">Todos</button></li>
+            <li><button id="acessorio">Acessórios</button></li>
+            <li><button id="camiseta">Camisetas</button></li>
           </ul>
         </nav>
       </div>
@@ -31,15 +28,12 @@
     
     <div class="mainLayout">
       <section class="mainLayout__left">
-
-        <ul class="productsList">
-
-        </ul>
+        <ul class="cardList" id="cardList">
         
+        </ul>
       </section>
 
       <section class="mainLayout__right">
-
           <div class="search">
             <input class="search__input" type="text" placeholder="Digite sua pesquisa aqui">
             <button class="search__btn">Pesquisar</button>
@@ -47,19 +41,29 @@
 
           <div class="checkout">
             <h5 class="checkout__title">Carrinho de compras</h5>
-            <div class="checkout__cart">
-
-              <ul class="checkoutList">
-
-              </ul>
-            
+            <div class="checkout__card">
+              
             </div>
-
           </div>
 
+          <div class="summary">
+            <div class="summary__count">
+              <span>Quantidade</span>
+              <span id="count">0</span>
+            </div>
+            
+            <div class="summary__total">
+              <span>Total</span>
+              <span>00,00</span>
+            </div>
+          </div>
       </section>
     
     </div>
   </main>
+
+  <script src="./js/database.js"></script>
+  <script src="./js/indexEditado.js"></script>
+
 </body>
 </html>
